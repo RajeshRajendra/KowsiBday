@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="flipclock.css">
+	<style type="text/css">
+		body{
+			position: relative;
+			display: flex;
+  			align-items: center;
+  			height: 90vh;
+  			left: 25%;
+  			background-color: rgb(0,0,0);
+
+		}
+		.noSelect {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+		.clock{
+			padding-top: 50;
+		}
+		.clock-display{
+			display:none;
+		}
+		.heart{
+			padding-left: 5%;
+			padding-top: 50%;
+			animation: popout 1s forwards;
+		}
+		.heart-display{
+			display:none;
+		}
+		@keyframes popout {
+			0%{
+				transform: scale(0);
+			}
+			100%{
+				transform: scale(1);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="clockId" class="clock"></div>
+	<a class="noSelect" href="indexstart.html">
+	<div id="heartId" class="heart-display noSelect"><img class="noSelect" src="heart.png" alt="heart.png"></div>
+	</a>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="flipclock.js"></script>
+	<script type="text/javascript">
+		var clock;
+		$(document).ready(function() {
+			var currentDate = new Date();
+			var futureDate = new Date("Oct 24, 2020 00:00:00");
+			// var futureDate =new Date();
+			// futureDate.setSeconds( futureDate.getSeconds() + 10 );
+			var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+			if(diff <= 0){
+				document.getElementById("clockId").classList.add("clock-display");
+				document.getElementById("heartId").classList.remove("heart-display");
+				document.getElementById("heartId").classList.add("heart");
+			}
+			clock = $('.clock').FlipClock(diff,{
+				clockFace:'DailyCounter',
+				countdown: true
+			});
+
+		});
+	</script>
+</body>
+</html>
